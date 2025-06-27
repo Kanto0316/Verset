@@ -89,4 +89,26 @@
 
     function afficherSuivant() {
       if (versets.length === 0) return;
-      index =
+      index = (index + 1) % versets.length;
+      afficherVerset();
+    }
+
+    function afficherPrecedent() {
+      if (versets.length === 0) return;
+      index = (index - 1 + versets.length) % versets.length;
+      afficherVerset();
+    }
+
+    fetch(url)
+      .then(response => response.text())
+      .then(data => {
+        versets = data.split("\n").filter(v => v.trim() !== "");
+        afficherVerset();
+      })
+      .catch(err => {
+        document.getElementById("verset").textContent = "Erreur de chargement des versets.";
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
