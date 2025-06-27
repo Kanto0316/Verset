@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="mg">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+      background-color: #d2b48c;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -63,6 +63,7 @@
       justify-content: center;
       gap: 20px;
       margin-top: 20px;
+      flex-wrap: wrap;
     }
 
     button {
@@ -105,6 +106,7 @@
   </div>
   <div class="controls">
     <button onclick="afficherPrecedent()">⬅ Précédent</button>
+    <button onclick="copierVerset()">📋 Copier</button>
     <button onclick="afficherSuivant()">Suivant ➡</button>
   </div>
   <script>
@@ -126,6 +128,11 @@
       if (versets.length === 0) return;
       index = (index - 1 + versets.length) % versets.length;
       afficherVerset();
+    }
+
+    function copierVerset() {
+      const texte = versets[index].replace(/^"+|"+$/g, "");
+      navigator.clipboard.writeText(texte);
     }
 
     fetch(url)
